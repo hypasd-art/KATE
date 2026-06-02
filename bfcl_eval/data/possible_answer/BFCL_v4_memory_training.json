@@ -1,0 +1,79 @@
+{"id": "memory_0-customer-0", "ground_truth": ["Michael"], "source": "My name is Michael, and this is my first time interacting with your company..."}
+{"id": "memory_30-healthcare-0", "ground_truth": ["Diabetes"], "source": "\"The biggest health issue I deal with is Type 2 Diabetes.\""}
+{"id": "memory_55-finance-0", "ground_truth": ["Legend Investments"], "source": "Being the Managing Director of Legend Investments means every day is a high-stakes chess game."}
+{"id": "memory_80-student-0", "ground_truth": ["Advanced Algorithms"], "source": "My favorite class this semester is definitely Advanced Algorithms."}
+{"id": "memory_130-notetaker-0", "ground_truth": ["08:00 AM"], "source": "Daycare: Drop-off at 8 AM, pick-up at 5 PM."}
+{"id": "memory_2-customer-2", "ground_truth": ["Seattle"], "source": "I'm 35 years old, live in Seattle..."}
+{"id": "memory_32-healthcare-2", "ground_truth": ["walk"], "source": "\"something as simple as going for a 30-minute walk after dinner can make a huge difference in keeping my glucose levels stable.\""}
+{"id": "memory_57-finance-2", "ground_truth": ["OncoPharm"], "source": "Last quarter, we closed a $14.2B healthcare merger between BioCrest Labs and OncoPharm Therapeutics—two biotech rivals with complementary oncology pipelines. It almost collapsed twice: once over IP valuation and again at the final regulatory approval stage. I spent three sleepless days in a conference room, fueled by espresso and sheer determination, hammering out a resolution. The WSJ called it 'the deal that reshaped modern cancer treatment.'"}
+{"id": "memory_82-student-2", "ground_truth": ["2631"], "source": "I’m taking a Distributed Systems course (CS 2631), which is probably the second hardest... we’re working on a major project that’s supposed to simulate a decentralized file storage system."}
+{"id": "memory_132-notetaker-2", "ground_truth": ["Friday"], "source": "Monday: Need to finalize Q1 budget report before Friday."}
+{"id": "memory_4-customer-4", "ground_truth": ["38", "thirty eight"], "source": "...my counter is only 38 square feet."}
+{"id": "memory_34-healthcare-4", "ground_truth": ["Gallbladder", "Cholecystectomy"], "source": "\"Then there was my surgery a few years ago—gallbladder removal.\""}
+{"id": "memory_59-finance-4", "ground_truth": ["SOAR"], "source": "We recently launched an AI-driven market analysis platform, namely SOAR, developed entirely in-house by a team I assembled from diverse backgrounds—quants, traditional analysts, and machine learning experts."}
+{"id": "memory_84-student-4", "ground_truth": ["Ten", "10"], "source": "Capstone alone can eat up a solid ten hours a week—more if you run into a big bug..."}
+{"id": "memory_134-notetaker-4", "ground_truth": ["Wednesday"], "source": "Monday: Client call with Jacob—delayed till Wednesday."}
+{"id": "memory_6-customer-6", "ground_truth": ["frothing pitcher", "filters"], "source": "Plus, I qualified for that free-shipping threshold after adding a couple of accessories like the stainless-steel frothing pitcher and some extra filters..."}
+{"id": "memory_36-healthcare-6", "ground_truth": ["Hypothyroidism"], "source": "\"Oh! And one condition I was really nervous about at first but have learned to manage is hypothyroidism. I was diagnosed in my early 40s...\""}
+{"id": "memory_61-finance-6", "ground_truth": ["Harvard"], "source": "I earned my Bachelor's in Economics from the University of Pennsylvania before heading to Harvard Business School for my MBA, where I was a Baker Scholar."}
+{"id": "memory_86-student-6", "ground_truth": ["Survival"], "source": "Lately, I’ve been really into co-op survival games — the kind where you have to gather resources..."}
+{"id": "memory_136-notetaker-6", "ground_truth": ["Benefits Package"], "source": "Tuesday: HR sent updated benefits package—review before next month’s deadline."}
+{"id": "memory_8-customer-8", "ground_truth": ["family gathering"], "source": "...I was really excited about getting it before my small family gathering this week..."}
+{"id": "memory_38-healthcare-8", "ground_truth": ["good diet"], "source": "\"My biggest focus right now is on maintaining a good diet.\""}
+{"id": "memory_63-finance-8", "ground_truth": ["7", "seven"], "source": "I maintain a 7 handicap, but honestly, it's never been about the score."}
+{"id": "memory_88-student-8", "ground_truth": ["Hobbies"], "source": "I’ve found that scheduling them — just like I schedule study time — helps me keep a healthy balance."}
+{"id": "memory_138-notetaker-8", "ground_truth": ["Legal"], "source": "Wednesday: Client proposal draft ready—send it for legal approval."}
+{"id": "memory_10-customer-10", "ground_truth": ["7", "seven"], "source": "...the outer box had seven crushed corners..."}
+{"id": "memory_40-healthcare-10", "ground_truth": ["03:00 PM"], "source": "\"I avoid caffeine after 3 PM, keep my bedroom cool and dark, and read a book before bed instead of looking at my phone.\""}
+{"id": "memory_65-finance-10", "ground_truth": ["Mandarin", "Simplified Chinese"], "source": "One of my long-term goals is becoming fluent in Mandarin"}
+{"id": "memory_90-student-10", "ground_truth": ["1", "One"], "source": "Eventually, I co-authored my first paper on this system... it’s probably one of my proudest moments in college."}
+{"id": "memory_140-notetaker-10", "ground_truth": ["Finance"], "source": "Thursday: Finance wants cost-cutting recommendations — brainstorm ideas."}
+{"id": "memory_12-customer-12", "ground_truth": ["toaster oven"], "source": "...my toaster oven is basically banished to the pantry..."}
+{"id": "memory_42-healthcare-12", "ground_truth": ["consistency"], "source": "Exercise has also changed for me. I used to think workouts had to be intense to be effective, but I've learned that consistency is more important."}
+{"id": "memory_67-finance-12", "ground_truth": ["Three", "3"], "source": "Travel has been essential in maintaining my global network. I'm typically on a plane three times a week, bouncing between New York, London, Hong Kong, and Dubai."}
+{"id": "memory_92-student-12", "ground_truth": ["VR", "AR"], "source": "We’re exploring how VR or AR technologies might help scientists get an even more intuitive feel for complex data."}
+{"id": "memory_142-notetaker-12", "ground_truth": ["Tax"], "source": "Urgent: Submit tax documents before Friday."}
+{"id": "memory_14-customer-14", "ground_truth": ["steam wand"], "source": "My lattes are consistently delicious, and I’m sure they could be even better with the right steam wand. "}
+{"id": "memory_44-healthcare-14", "ground_truth": ["puzzles"], "source": "\"Let’s talk about memory. I wouldn’t say I’m forgetful, but I definitely have more ‘where did I put my keys?’ moments than I used to. I try to keep my brain sharp by doing puzzles, reading, and even learning new skills. I started taking an online class on art history just for fun...\""}
+{"id": "memory_69-finance-14", "ground_truth": ["Nothing"], "source": "Over the years, I’ve learned that success in finance means nothing if you sacrifice the relationships that matter most."}
+{"id": "memory_94-student-14", "ground_truth": ["Backup"], "source": "...that crisis hammered home the importance of data backups."}
+{"id": "memory_144-notetaker-14", "ground_truth": ["Security Compliance"], "source": "Review vendor contract before signing. Finish security compliance training module."}
+{"id": "memory_16-customer-16", "ground_truth": ["Portland"], "source": "...I’m heading out of town next weekend for a small freelance gig in Portland."}
+{"id": "memory_46-healthcare-16", "ground_truth": ["6.9"], "source": "\"My A1C was 6.9%\""}
+{"id": "memory_71-finance-16", "ground_truth": ["Family trip"], "source": "We take trips when we can, often blending business and leisure. My wife and I have a rule: if I have an international deal that requires travel and it aligns with the kids’ school break, we turn it into a family trip."}
+{"id": "memory_96-student-16", "ground_truth": ["lawn"], "source": "The lawn is also where some of the biggest campus events take place, like our annual Tech Fest."}
+{"id": "memory_146-notetaker-16", "ground_truth": ["Vacuum"], "source": "Car: Wash and vacuum on Sunday."}
+{"id": "memory_18-customer-18", "ground_truth": ["digital art"], "source": "My latest experiments include practicing some latte art designs that mirror my digital artwork..."}
+{"id": "memory_48-healthcare-18", "ground_truth": ["130", "One hundred thirty", "One hundred and thirty"], "source": "\"my LDL (bad cholesterol) was 130 mg/dL—higher than the recommended under 100 mg/dL.\""}
+{"id": "memory_73-finance-18", "ground_truth": ["Aladdin"], "source": "Last year, I championed the implementation of BlackRock's Aladdin platform, which wasn't an easy sell to our board given the price tag."}
+{"id": "memory_98-student-18", "ground_truth": ["Tech for Good"], "source": "Our CS department organizes a 'Tech for Good' day... Volunteers like me help run mini-workshops..."}
+{"id": "memory_148-notetaker-18", "ground_truth": ["10 AM - 12 PM"], "source": "Tuesday: System downtime from 10 AM - 12 PM, slowed down workflow. HR sent updated benefits package—review before next month’s deadline. Sent follow-up emails to vendors, waiting on response."}
+{"id": "memory_20-customer-20", "ground_truth": ["513", "five hundred thirteen", "five hundred and thirteen"], "source": "I’d be thrilled if your subscription included nuanced, 513 mL, small-batch roasts that I can’t easily find in my local grocery store."}
+{"id": "memory_50-healthcare-20", "ground_truth": ["22", "Twenty two"], "source": "\"my levels came back at 22 ng/mL, which is considered deficient. The normal range is 30-50 ng/mL\""}
+{"id": "memory_75-finance-20", "ground_truth": ["Python"], "source": "Python and R have become invaluable tools in my arsenal. I taught myself coding during the pandemic lockdowns – spent countless late nights wrestling with algorithms, but it's paid off enormously."}
+{"id": "memory_100-student-20", "ground_truth": ["5", "Five"], "source": "Right now, I’m leaning heavily towards going into the industry for 5 years..."}
+{"id": "memory_150-notetaker-20", "ground_truth": ["Probiotics"], "source": "Supplements & Meds: Vitamin D3—1000 IU daily. Omega-3s—good for joints. Iron levels were low last check-up—remember to take supplements. Probiotics—help with digestion, take in the morning."}
+{"id": "memory_22-customer-22", "ground_truth": ["49.99", "$49.99"], "source": "The total amount was around, oh, let’s say $49.99..."}
+{"id": "memory_52-healthcare-22", "ground_truth": ["18", "Eighteen"], "source": "\"My ESR (erythrocyte sedimentation rate) was 18 mm/hr\""}
+{"id": "memory_77-finance-22", "ground_truth": ["Intelligent Motors"], "source": "Early in my career, I lost a massive deal from, Intelligent Motors, on which I had spent months working on."}
+{"id": "memory_102-student-22", "ground_truth": ["9", "Nine"], "source": "I did an internship last summer at a tech startup with 9 people that specialized in data analytics software..."}
+{"id": "memory_152-notetaker-22", "ground_truth": ["3", "Three"], "source": "DIY Fixes: Tighten loose cabinet handle. Replace bathroom lightbulb. Patch up minor wall scuffs."}
+{"id": "memory_24-customer-24", "ground_truth": ["Creative Boom"], "source": "...my kitchen now looks like a page out of a Creative Boom design magazine..."}
+{"id": "memory_54-healthcare-24", "ground_truth": ["Losartan 50 mg"], "source": "\"For my high blood pressure, I take losartan 50 mg once daily.\""}
+{"id": "memory_79-finance-24", "ground_truth": ["Bet on yourself"], "source": "One thing I always tell young professionals is: bet on yourself."}
+{"id": "memory_104-student-24", "ground_truth": ["Cross functional"], "source": "I’d love to end up at a company that encourages cross-functional collaboration—with designers, data scientists..."}
+{"id": "memory_154-notetaker-24", "ground_truth": ["1-20"], "source": "Family time: Take kid to park this weekend. Pick out a new bedtime story book. Help with counting practice—teacher says focus on numbers 1-20."}
+{"id": "memory_26-customer-26", "ground_truth": ["coffee_creations_1237"], "source": "I'm always snapping photos of my new creations and sharing them on my instagram page at @coffee_creations_1237..."}
+{"id": "memory_106-student-26", "ground_truth": ["Japan"], "source": "My travel bug really kicked in during my junior year, when I saved up money from a summer internship to go to Japan over winter break."}
+{"id": "memory_28-customer-28", "ground_truth": ["corner dent"], "source": "I’d like to mitigate any chance of corner dents after a long journey from the warehouse."}
+{"id": "memory_108-student-28", "ground_truth": ["London"], "source": "My parents, my sister, and I flew into London... After London, we hopped on a train to Paris."}
+{"id": "memory_110-student-30", "ground_truth": ["Advanced Algorithms"], "source": "She’s actually in my advanced algorithms class."}
+{"id": "memory_112-student-32", "ground_truth": ["Coffee"], "source": "I’ve thought about asking her to grab coffee after class..."}
+{"id": "memory_114-student-34", "ground_truth": ["Family"], "source": "I usually tell them everything, but this time I’m keeping it a bit more under wraps..."}
+{"id": "memory_116-student-36", "ground_truth": ["6", "Six"], "source": "I’m twenty-two... my sister... just turned sixteen."}
+{"id": "memory_118-student-38", "ground_truth": ["Software"], "source": "My dad is a software engineer..."}
+{"id": "memory_120-student-40", "ground_truth": ["Tony"], "source": "...my roommate and best friend from freshman year, Tony..."}
+{"id": "memory_122-student-42", "ground_truth": ["Sailing"], "source": "I also have a couple of friends I met through the campus sailing club."}
+{"id": "memory_124-student-44", "ground_truth": ["Library"], "source": "One of those people is Jackson, a law student who somehow ended up reading case studies right next to my stack of cryptography textbooks..."}
+{"id": "memory_126-student-46", "ground_truth": ["Task manager"], "source": "I use a digital task manager that syncs across my devices..."}
+{"id": "memory_128-student-48", "ground_truth": ["11:00 PM"], "source": "But most evenings, I try to cut off academic work by 11:00 P.M. so I can decompress."}

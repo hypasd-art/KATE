@@ -1,0 +1,76 @@
+{"id": "memory_1-customer-1", "ground_truth": ["35", "thirty five"], "source": "I'm 35 years old, live in Seattle..."}
+{"id": "memory_31-healthcare-1", "ground_truth": ["10", "ten"], "source": "\"I was diagnosed about ten years ago,\""}
+{"id": "memory_56-finance-1", "ground_truth": ["Surreal"], "source": "My first major win was in 2019 when I structured a defense against a hostile takeover of a mid-cap tech firm, namely Surreal Incorporated. We crafted an innovative poison pill strategy—one so effective it became a case study at Harvard Business School."}
+{"id": "memory_81-student-1", "ground_truth": ["One", "1"], "source": "We have the entire semester to conceptualize, design, and build a software solution that solves some real problem."}
+{"id": "memory_131-notetaker-1", "ground_truth": ["Friday"], "source": "Daycare: Monthly payment due Friday."}
+{"id": "memory_3-customer-3", "ground_truth": ["strawberry matcha"], "source": "...I occasionally like a strawberry matcha latte..."}
+{"id": "memory_33-healthcare-3", "ground_truth": ["Hypertension", "blood pressure"], "source": "\"The scariest moment was when my blood pressure spiked dangerously high a few years ago, and I ended up in the ER.\""}
+{"id": "memory_58-finance-3", "ground_truth": ["Dealogic"], "source": "Dealogic has become my virtual deal diary"}
+{"id": "memory_83-student-3", "ground_truth": ["Machine learning", "ML", "AI", "Artificial Intelligence"], "source": "My group and I decided to work on a project that uses machine learning to analyze social media sentiment for better emergency response."}
+{"id": "memory_133-notetaker-3", "ground_truth": ["Passwords"], "source": "Monday: IT updated security protocols—change passwords ASAP."}
+{"id": "memory_5-customer-5", "ground_truth": ["17", "seventeen"], "source": "...a new-customer 17% off discount or promotional offer..."}
+{"id": "memory_35-healthcare-5", "ground_truth": ["Notebook"], "source": "\"I keep a little notebook to track everything—appointments, medication changes, even just notes about how I’m feeling.\""}
+{"id": "memory_60-finance-5", "ground_truth": ["Goldman Sachs"], "source": "I started as an analyst at Goldman Sachs in 2001—cutting my teeth on M&A modeling and surviving the dot-com crash."}
+{"id": "memory_85-student-5", "ground_truth": ["Gym", "Workout"], "source": "Now, I try to hit the gym around four times a week."}
+{"id": "memory_135-notetaker-5", "ground_truth": ["System Downtime"], "source": "Tuesday: System downtime from 10 AM - 12 PM, slowed down workflow."}
+{"id": "memory_7-customer-7", "ground_truth": ["11", "eleven"], "source": "...the checkout page gave me a reasonable estimated delivery time of eleven business days..."}
+{"id": "memory_37-healthcare-7", "ground_truth": ["Vaccine"], "source": "\"I also had a bout of pneumonia a couple of years ago, which knocked me out for weeks. Ever since then, I’ve been super diligent about getting my flu shot and pneumonia vaccine.\""}
+{"id": "memory_62-finance-7", "ground_truth": ["long term approach"], "source": "While my day job is focused on institutional finance, my personal portfolio is a different game. I take a long-term approach, balancing high-risk opportunities with stable, income-generating investments."}
+{"id": "memory_87-student-7", "ground_truth": ["The Infinity Courts"], "source": "My favorite AI-themed sci-fi book right now is 'The Infinity Courts' by Akemi Dawn Bowman."}
+{"id": "memory_137-notetaker-7", "ground_truth": ["05:00 PM"], "source": "Daycare: Drop-off at 8 AM, pick-up at 5 PM."}
+{"id": "memory_9-customer-9", "ground_truth": ["steam wand"], "source": "...it looks like the steam wand is also bent at an odd angle..."}
+{"id": "memory_39-healthcare-9", "ground_truth": ["avocado"], "source": "\"My go-to breakfast is usually Greek yogurt with nuts and berries or eggs with avocado.\""}
+{"id": "memory_64-finance-9", "ground_truth": ["05:30 AM"], "source": "My schedule is intentionally structured—mornings start at 5:30 AM with a review of global markets, followed by a workout, and then a day packed with high-stakes decision-making."}
+{"id": "memory_89-student-9", "ground_truth": ["Gym", "Weightlifting"], "source": "It’s not like I’m trying to become a bodybuilder or anything, but I love seeing incremental improvements."}
+{"id": "memory_139-notetaker-9", "ground_truth": ["30", "Thirty"], "source": "Monday: Team meeting ran over by 30 minutes."}
+{"id": "memory_11-customer-11", "ground_truth": ["pitcher"], "source": "...The pitcher... seems to be okay, with just a tiny scratch on the outside..."}
+{"id": "memory_41-healthcare-11", "ground_truth": ["salmon"], "source": "\"One of my favorite go-to meals is grilled salmon with roasted vegetables—it’s simple, delicious, and packed with nutrients that help with inflammation.\""}
+{"id": "memory_66-finance-11", "ground_truth": ["55", "Fifty Five"], "source": "In the next phase of my career, I aim to transition into a chairman role at my firm by 55, focusing more on high-level strategy and mentorship rather than the day-to-day intensity of deal-making."}
+{"id": "memory_91-student-11", "ground_truth": ["Oceanic temperature"], "source": "The first research project I really got into was about visualizing oceanic temperature changes over time for a climate study group."}
+{"id": "memory_141-notetaker-11", "ground_truth": ["Two", "2"], "source": "Friday: Followed up with vendors—two responded, one still pending."}
+{"id": "memory_13-customer-13", "ground_truth": ["39", "thirty nine"], "source": "...a $39 specialized storage canister that’s supposed to keep beans fresher for longer."}
+{"id": "memory_43-healthcare-13", "ground_truth": ["book club"], "source": "\"One thing I didn’t expect about aging is how important social connections are. ... I make it a point to have coffee with friends at least once a week, and I joined a book club last year.\""}
+{"id": "memory_68-finance-13", "ground_truth": ["Future Focus"], "source": "Every quarter, I host intimate dinner series called 'Future Focus' where I bring together diverse groups—fintech innovators, traditional bankers, academics, even artists and philosophers."}
+{"id": "memory_93-student-13", "ground_truth": ["IEEE VIS", "Visualization"], "source": "The bigger conference is the IEEE Visualization Conference (commonly known as IEEE VIS)..."}
+{"id": "memory_143-notetaker-13", "ground_truth": ["Call auto repair shop"], "source": "Urgent: Call auto repair shop about weird noise in the engine."}
+{"id": "memory_15-customer-15", "ground_truth": ["Garmin"], "source": "...a digital scale you collaborated with Garmin on."}
+{"id": "memory_45-healthcare-15", "ground_truth": ["135", "One hundred thirty five", "One hundred and thirty five"], "source": "\"My most recent fasting blood glucose test came back at 135 mg/dL\""}
+{"id": "memory_70-finance-15", "ground_truth": ["Engineering"], "source": "My two kids are at that fascinating stage where they’re forming strong opinions and exploring their own paths—one is 14 and already obsessed with engineering, while the other is 10 and still figuring out the world."}
+{"id": "memory_95-student-15", "ground_truth": ["Sophomore", "Second"], "source": "Beyond that, there’s this VR/AR Club I’ve been attending on and off since my sophomore year."}
+{"id": "memory_145-notetaker-15", "ground_truth": ["Update"], "source": "Tech: Update phone software."}
+{"id": "memory_17-customer-17", "ground_truth": ["Oregon"], "source": "The coffee grinder bundle... was marked as shipped from one of your regional warehouses, which... is located in Oregon..."}
+{"id": "memory_47-healthcare-17", "ground_truth": ["100", "One Hundred"], "source": "\"which is a bit higher than I’d like—it should ideally be under 100 mg/dL\""}
+{"id": "memory_72-finance-17", "ground_truth": ["Bloomberg Terminal"], "source": "My day typically starts with Bloomberg Terminal – it's like my financial command center."}
+{"id": "memory_97-student-17", "ground_truth": ["Engi-House"], "source": "In my first two years, I stayed in a dorm that was specifically for engineering majors— 'The Engi-House,' as we jokingly called it."}
+{"id": "memory_147-notetaker-17", "ground_truth": ["Cereal"], "source": "Organizing: Restock pantry—running low on rice and cereal."}
+{"id": "memory_19-customer-19", "ground_truth": ["19", "nineteen"], "source": "...an extended 19-month warranty plan for members, has me all kinds of excited."}
+{"id": "memory_49-healthcare-19", "ground_truth": ["138/85"], "source": "\"At my last check-up, my reading was 138/85 mmHg\""}
+{"id": "memory_74-finance-19", "ground_truth": ["Tableau"], "source": "Data visualization has become increasingly crucial in our client communications. I've become something of a Tableau evangelist within the firm."}
+{"id": "memory_99-student-19", "ground_truth": ["e-sports"], "source": "One cool development is that our school’s e-sports team has gained official recognition."}
+{"id": "memory_149-notetaker-19", "ground_truth": ["Yes"], "source": "Wednesday: Presentation to leadership went well, but need to tweak a few slides for next week’s review. Client proposal draft ready—send it for legal approval. Need to onboard new hire—schedule one-on-one."}
+{"id": "memory_21-customer-21", "ground_truth": ["3", "three"], "source": "It was posted three days ago."}
+{"id": "memory_51-healthcare-21", "ground_truth": ["42", "Forty two"], "source": "\"my ALT levels were a little elevated at 42 U/L (normal is under 35 U/L)\""}
+{"id": "memory_76-finance-21", "ground_truth": ["Adaptability, Discipline, Relationships"], "source": "Success is an equation with many variables, but if I had to narrow it down, I’d say it comes down to three things: discipline, adaptability, and relationships."}
+{"id": "memory_101-student-21", "ground_truth": ["Immersive analytics", "Human computer interaction"], "source": "part of me is really intrigued by the idea of continuing my research in immersive analytics or even branching into human-computer interaction..."}
+{"id": "memory_151-notetaker-21", "ground_truth": ["Chicken"], "source": "Diet: Meal prep on Sunday—grilled chicken, quinoa, and veggies."}
+{"id": "memory_23-customer-23", "ground_truth": ["2", "two"], "source": "I actually received two 'order confirmed' emails..."}
+{"id": "memory_53-healthcare-23", "ground_truth": ["Metformin 1000 mg"], "source": "\"For my Type 2 Diabetes, I’ve been taking metformin 1000 mg twice daily for the last several years.\""}
+{"id": "memory_78-finance-23", "ground_truth": ["Luck"], "source": "But luck favors those who put themselves in positions where opportunity can find them."}
+{"id": "memory_103-student-23", "ground_truth": ["Software", "SWE"], "source": "I’ve been exploring software engineering roles that overlap with the fields I’ve grown passionate about—data visualization, VR/AR technologies..."}
+{"id": "memory_153-notetaker-23", "ground_truth": ["Glue Stick"], "source": "Shopping: Buy more diapers. Get school supplies—crayons, notebooks, glue sticks. Pack extra snacks in daycare bag."}
+{"id": "memory_25-customer-25", "ground_truth": ["1.8"], "source": "I understand that shipping can be unpredictable, especially with the average 1.8 inches of rainfall everyday..."}
+{"id": "memory_105-student-25", "ground_truth": ["Maine"], "source": "It was a sailing trip off the coast of Maine."}
+{"id": "memory_27-customer-27", "ground_truth": ["art contest"], "source": "...I’ve had a few small events at my place—family gatherings, design meetups, even an impromptu latte-art contest..."}
+{"id": "memory_107-student-27", "ground_truth": ["Kyoto"], "source": "I went to Tokyo first... After a few days there, I headed to Kyoto..."}
+{"id": "memory_29-customer-29", "ground_truth": ["MonoBean"], "source": "If there’s any brands I trust for a potentially substantial purchase, it’s MonoBean and yours..."}
+{"id": "memory_109-student-29", "ground_truth": ["State Park", "Beach Town"], "source": "Beyond the bigger international trips, I’ve also done some smaller getaways... we’ll drive out to a state park or a nearby beach town."}
+{"id": "memory_111-student-31", "ground_truth": ["Team", "Group"], "source": "We ended up on the same team for a project about a month ago..."}
+{"id": "memory_113-student-33", "ground_truth": ["Focus"], "source": "I’m also worried about losing focus. The last thing I want is to get overly distracted..."}
+{"id": "memory_115-student-35", "ground_truth": ["Archie"], "source": "...our golden retriever, Archie..."}
+{"id": "memory_117-student-37", "ground_truth": ["Saturday"], "source": "One of our family traditions is going on a Saturday morning hike whenever I’m in town."}
+{"id": "memory_119-student-39", "ground_truth": ["Grandma", "Grandmother"], "source": "My grandma still teases me about the time I broke her antique vase..."}
+{"id": "memory_121-student-41", "ground_truth": ["Carla"], "source": "We ended up bonding over pizza at 3 a.m. because we were the only two left in the lab so late."}
+{"id": "memory_123-student-43", "ground_truth": ["Game"], "source": "I spend a decent chunk of time on weekends playing multiplayer strategy games, especially when I need a mental break..."}
+{"id": "memory_125-student-45", "ground_truth": ["06:30 AM"], "source": "I usually wake up around 6:30 in the morning."}
+{"id": "memory_127-student-47", "ground_truth": ["Gym", "Workout"], "source": "I’ve discovered that if I skip the gym too many days... I consider my workout time to be non-negotiable..."}
+{"id": "memory_129-student-49", "ground_truth": ["7", "Seven"], "source": "Sundays, I attend a group study session with seven other classmates..."}
