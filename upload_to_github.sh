@@ -98,7 +98,7 @@ EOF
 echo ".gitignore created"
 
 # Stage all files
-git add .
+git add -A
 
 # Show status
 git status
