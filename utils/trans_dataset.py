@@ -28,12 +28,10 @@ part2.sort(key=lambda x: int(x["id"].split("-")[-1]))
 
 with open("../bfcl_eval/data/BFCL_v4_memory_training.json", "w") as f1:
     for item in part1:
-
         f1.write(json.dumps(item, ensure_ascii=False) + "\n")
 
 with open("../bfcl_eval/data/BFCL_v4_memory_testing.json", "w") as f2:
     for item in part2:
-
         f2.write(json.dumps(item, ensure_ascii=False) + "\n")
 
 results = []

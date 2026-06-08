@@ -2,27 +2,27 @@
 
 usage() {
     cat << EOF
-用法: $0 [选项]
+Usage: $0 [options]
 
-  -d, --dataset DATASET      test_normal|test_challenge|both (默认: test_normal)
-  -p, --parallel NUM         并行数 (默认: 1)
-  -r, --retrieval            启用检索增强
-  --restart                  重启实验
-  --memp                     使用 memp.py
-  --test2                    使用 appworld_test_2.py
+  -d, --dataset DATASET      test_normal|test_challenge|both (default: test_normal)
+  -p, --parallel NUM         number of parallel workers (default: 1)
+  -r, --retrieval            enable retrieval-augmented mode
+  --restart                  restart the experiment
+  --memp                     use memp.py
+  --test2                    use appworld_test_2.py
   --gpt4                     GPT-4.1
-  --qwen32b                  Qwen3-32B (默认)
+  --qwen32b                  Qwen3-32B (default)
   --qwen8b                   Qwen3-8B
-  -h, --help                 帮助
+  -h, --help                 show this help message
 
-示例: $0 --gpt4 -r -p 4 -d both
+Example: $0 --gpt4 -r -p 4 -d both
 EOF
     exit 1
 }
 
-# 默认值
+# Defaults
 MODEL="Qwen/Qwen3-32B"
-BASE_URL="http://175.102.130.120:28000/v1"
+BASE_URL="${QWEN32B_BASE_URL:-}"
 KEY="EMPTY"
 DATASET="test_normal"
 PARALLEL=1
@@ -36,18 +36,23 @@ while [[ $# -gt 0 ]]; do
         --restart) RESTART="--restart"; shift;;
         --memp) USE_MEMP=true; shift;;
         --test2) USE_TEST2=true; shift;;
-        --gpt4) MODEL="gpt-4.1-2025-04-14"; BASE_URL="https://api.v3.cm/v1";
+        --gpt4) MODEL="gpt-4.1-2025-04-14"; BASE_URL="${OPENAI_BASE_URL:-https://api.openai.com/v1}";
                 KEY="${OPENAI_API_KEY:-}"; shift;;
-        --qwen32b) MODEL="Qwen/Qwen3-32B"; BASE_URL="http://175.102.130.120:28000/v1"; KEY="EMPTY"; shift;;
-        --qwen8b) MODEL="Qwen/Qwen3-8B"; BASE_URL="http://210.75.240.154:28001/v1"; KEY="EMPTY"; shift;;
+        --qwen32b) MODEL="Qwen/Qwen3-32B"; BASE_URL="${QWEN32B_BASE_URL:-}"; KEY="EMPTY"; shift;;
+        --qwen8b) MODEL="Qwen/Qwen3-8B"; BASE_URL="${QWEN8B_BASE_URL:-}"; KEY="EMPTY"; shift;;
         -h|--help) usage;;
-        *) echo "未知选项: $1"; usage;;
+        *) echo "Unknown option: $1"; usage;;
     esac
 done
 
+if [[ -z "$BASE_URL" ]]; then
+    echo "Error: BASE_URL is not set. Export QWEN32B_BASE_URL, QWEN8B_BASE_URL, or OPENAI_BASE_URL before running."
+    exit 1
+fi
+
 export BASE_URL="$BASE_URL" KEY="$KEY" MODEL="$MODEL"
 
-# 提取模型简称
+# Extract short model name
 case "$MODEL" in
     *gpt-4*) model_short="gpt-4.1-2025-04-14";;
     *Qwen3-32B*) model_short="Qwen3-32B";;
@@ -70,11 +75,11 @@ run_experiment() {
         python appworld_test.py --dataset_name "$ds" --experiment_name "$exp" --parallel_decode "$PARALLEL" $RETRIEVAL $RESTART
     fi
 
-    [ $? -eq 0 ] && appworld evaluate "$exp" "$ds" || { echo "实验失败"; return 1; }
+    [ $? -eq 0 ] && appworld evaluate "$exp" "$ds" || { echo "Experiment failed"; return 1; }
 }
 
 case "$DATASET" in
     both) run_experiment "test_normal" && run_experiment "test_challenge";;
     test_normal|test_challenge) run_experiment "$DATASET";;
-    *) echo "错误: 数据集须为 test_normal, test_challenge 或 both"; exit 1;;
+    *) echo "Error: dataset must be test_normal, test_challenge, or both"; exit 1;;
 esac

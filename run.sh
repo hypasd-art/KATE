@@ -1,13 +1,11 @@
 #!/bin/bash
-export HTTPS_PROXY="${HTTPS_PROXY:-http://cipzhao:cipzhao@210.75.240.138:16890}"
-export HTTP_PROXY="${HTTP_PROXY:-http://cipzhao:cipzhao@210.75.240.138:16890}"
 export CUDA_VISIBLE_DEVICES="${CUDA_VISIBLE_DEVICES:-7,8}"
 export API_KEY="${API_KEY:-EMPTY}"
-export BASE_URL="${BASE_URL:-http://210.75.240.153:29000/v1/}"
+export BASE_URL="${BASE_URL:-}"
 export LOCAL_SERVER_PORT="${LOCAL_SERVER_PORT:-29000}"
 
-INFORMATION_DICT="${INFORMATION_DICT:-/home/yphao/Experience_Tool/KATE/Experience/BFCL_v4_multi_turn_base_training_summary_with_embedding.json}"
-LOCAL_MODEL_PATH="${LOCAL_MODEL_PATH:-/netcache/huggingface/Qwen3-8B}"
+INFORMATION_DICT="${INFORMATION_DICT:-./KATE/bfcl_eval/Experience/BFCL_v4_multi_turn_base_training_summary_with_embedding.json}"
+LOCAL_MODEL_PATH="${LOCAL_MODEL_PATH:-Qwen/Qwen3-8B}"
 TEST_CATEGORY="multi_turn_miss_param_testing, multi_turn_long_context_testing, multi_turn_base_testing, multi_turn_miss_func_testing" 
 MODELS=("Qwen/Qwen3-8B-FC")
 

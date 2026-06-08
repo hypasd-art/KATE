@@ -31,7 +31,18 @@ if TYPE_CHECKING:
     )
 from sentence_transformers import SentenceTransformer, util
 import numpy as np
-model = SentenceTransformer('/home/yphao/Experience_Tool/test/gorilla/berkeley-function-call-leaderboard/all-MiniLM-L6-v2')
+
+_EMBEDDING_MODEL = None
+
+def _get_embedding_model():
+    global _EMBEDDING_MODEL
+    if _EMBEDDING_MODEL is None:
+        model_path = os.environ.get(
+            "EMBEDDING_MODEL_PATH",
+            "all-MiniLM-L6-v2",
+        )
+        _EMBEDDING_MODEL = SentenceTransformer(model_path)
+    return _EMBEDDING_MODEL
 
 
 import random
@@ -46,7 +57,7 @@ You don't need to invoke the tools at this stage, just filter the helpful exampl
 """
 
 def top_k_similar_questions_reflection_and_summary(analysis_result, target_content, k=5, p = 0.6, involved_classes=None, skip_first_example=False):
-    target_embeddings = model.encode([target_content])[0]
+    target_embeddings = _get_embedding_model().encode([target_content])[0]
     information_results = []
     for involved_class in involved_classes:
         # print("involved_class:", involved_class)
@@ -95,7 +106,7 @@ def get_random_similar_questions_reflection_and_summary(analysis_result, target_
     return information_results
 
 def top_k_similar_questions_reflection_and_summary_no_classes(analysis_result, target_content, k=5, p = 0.6, skip_first_example=False):
-    target_embeddings = model.encode([target_content])[0]
+    target_embeddings = _get_embedding_model().encode([target_content])[0]
     information_results = []
     scores = []
     for question, item in analysis_result.items():
@@ -113,11 +124,11 @@ def top_k_similar_questions_intent(analysis_result, target_content, k=5, p = 0.6
     intent_results = {}
     for involved_class in involved_classes:
         # for idx, intent in enumerate(target_content):
-        target_embeddings = model.encode([target_content])[0] # ["intent"]
+        target_embeddings = _get_embedding_model().encode([target_content])[0] # ["intent"]
         # [idx]["intent"]
         scores = []
-        for item in analysis_result[involved_class]: 
-            intent_embeddings = np.array(item["embedding"], dtype=np.float32) 
+        for item in analysis_result[involved_class]:
+            intent_embeddings = np.array(item["embedding"], dtype=np.float32)
             score = util.cos_sim(target_embeddings, intent_embeddings).item()
             scores.append((score, item)) # ["pattern"]
         # 按分数降序排序，选前k个
@@ -187,8 +198,8 @@ def top_k_similar_questions_abstract(analysis_result, target_content, k=5, p = 0
         target_tools_name = []
         for tool in tools:
             target_tools_name.append(tool["name"])
-        target_embeddings = model.encode([target_content])[0]
-        intent_target_embeddings = model.encode([intent])[0]
+        target_embeddings = _get_embedding_model().encode([target_content])[0]
+        intent_target_embeddings = _get_embedding_model().encode([intent])[0]
 
         scores = []
         for question, item in analysis_result[involved_class].items():

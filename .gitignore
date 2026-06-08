@@ -70,13 +70,3 @@ models/
 # OS
 .DS_Store
 Thumbs.db
-
-# AppWorld data directory
-app_world/data/
-
-# Large data files
-bfcl_eval/data/BFCL_v4_live_irrelevance.json
-bfcl_eval/data/BFCL_v4_live_multiple.json
-bfcl_eval/data/BFCL_v4_multi_turn_training_data.json
-bfcl_eval/data/training_data.json
-Experience/intent_pattern.json
