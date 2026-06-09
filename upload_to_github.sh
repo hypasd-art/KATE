@@ -104,15 +104,7 @@ git add -A
 git status
 
 # Commit with message
-git commit -m "Initial commit: KATE - Knowledge-Augmented Tool-use Enhancement framework
-
-- Add BFCL evaluation framework
-- Add AppWorld integration
-- Add experience management system
-- Add error analysis tools
-- Add model handlers for Qwen and other models
-- Add documentation (README.md, handler docs)
-"
+git commit -m "Initial commit: KATE - Knowledge-Augmented Tool-use Enhancement framework"
 
 # Push to GitHub
 echo ""
