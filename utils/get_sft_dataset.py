@@ -159,12 +159,6 @@ def top_k_similar_questions_reflection_and_summary(analysis_result, target_conte
         # 按分数降序排序，选前k个
         scores.sort(reverse=True)
         if skip_first_example:
-        #     try:
-        #         assert scores[0][1] == target_content
-        #     except:
-        #         print(scores[0][1])
-        #         print(target_content)
-        #         print("------------------------------------------------")
             scores = scores[1:]
         top_questions = [question for score, question in scores[:k] if score > p]
     information_results.extend(top_questions)
@@ -230,744 +224,8 @@ def get_llm_response_n(prompt, n_sample=1):
         n=n_sample
     )
     return [choice.message.content for choice in response.choices]
-# [
-#             {"role": "system", "content": "You are an intelligent agent behavior analysis assistant."},
-#             {"role": "user", "content": prompt}
-#         ]
-# def process_single_row(row, row_index):
-#     """
-
-#     Args:
-#         row: DataFrame row containing the original data
-#         current_split_name: Name of the current split (train/test)
-#         row_index: Index of the row in the DataFrame
-
-#     Returns:
-#         pd.Series: Processed row data in the required format
-#     """
-#     import numpy as np
-#     function = []
-#     involved_classes = row.get("involved_classes")
-#     for func_collection in involved_classes:
-#         # func_doc is a list of dict
-#         func_doc = load_file(
-#             MULTI_TURN_FUNC_DOC_PATH  + "/" + MULTI_TURN_FUNC_DOC_FILE_MAPPING[func_collection]
-#         )
-#         function.extend(func_doc)
-#     # Handle Miss Func category; we need to remove the holdout function doc
-#     if "missed_function" in row and not pd.isna(row["missed_function"]):
-#         # print(row["missed_function"])
-#         new_missed = {}
-#         for turn_index, missed_func_names in row["missed_function"].items():
-#             row["missed_function"][turn_index] = []
-#             for missed_func_name in missed_func_names:
-#                 for i, func_doc in enumerate(function):
-#                     if func_doc["name"] == missed_func_name:
-#                         # Add the missed function doc to the missed_function list
-#                         row["missed_function"][turn_index].append(func_doc) # 
-#                         # Remove it from the function list
-#                         function.pop(i)
-#                         break
-#             #  = new_missed
-#     formatted_prompt = ""
-#     formatted_prompt += "# Tools\n\nYou may call one or more functions to assist with the user query.\n\nYou are provided with function signatures within <tools></tools> XML tags:\n<tools>"
-#     for tool in function:
-#         tool["description"] += " Note that the provided function is in Python 3 syntax."
-#         formatted_prompt += f"\n{json.dumps(tool)}"
-#     formatted_prompt += '\n</tools>\n\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\n<tool_call>\n{"name": <function-name>, "arguments": <args-json-object>}\n</tool_call>\n'
-
-#     question = row.get("question", "")
-#     processed_question = []
-#     if "missed_function" in row and not pd.isna(row["missed_function"]):
-#         for idx, item in enumerate(question):
-#             if str(idx) in row["missed_function"]:
-#                 processed_question.append([{"role": "user", "content": json.dumps(row["missed_function"][str(idx)]) + "\nI have updated some more functions you can choose from. What about now?"}])
-#                 assert len(item) == 0
-#             else:
-#                 processed_question.append(item)
-#     else:
-#         processed_question = question
 
 
-#     # Build prompt structure
-#     prompt = [{"role": "system", "content": formatted_prompt}] 
-#     llm_tool_calls = []
-    
-
-#     # Extract ground truth from reward_model or fallback to golden_answers
-#     ground_truth = row.get("golden_answers", [])
-#     initial_config = row.get("initial_config")
-#     involved_classes = row.get("involved_classes")
-#     test_entry_id = row.get("id")
-#     trajectory_id = ""
-#     for idx, q in enumerate(processed_question):
-#         prompt.append({"role": "user", "content": q[0]["content"]})
-#         if len(ground_truth[idx]) == 0:
-#             print(row)
-#             prompt_n = copy.deepcopy(prompt)
-#             # assert "miss_func" in row["id"] or "miss_param" in row["id"], "Ground truth is empty but not a miss_func or miss_param case."
-#             if "miss_func" in row["id"]:
-#                 content_response = "I am sorry, but I cannot provide a valid tool call as the required function is not available."
-#             elif "miss_param" in row["id"]:
-#                 content_response = "I am sorry, but I cannot provide a valid tool call as the required parameters are missing."
-#             attempt = 0
-#             # while attempt < 3:
-#             #     try:
-#             #         ref_response = get_llm_response(prompt + [{"role": "user", "content": prompt_response.format(r_ground=content_response)}])
-#             #         ref_response_n = ref_response.split("</think>")[-1].strip()
-#             #         assert "<tool_call>" not in ref_response_n
-#             #         prompt.append({"role": "assistant", "content": ref_response})
-#             #     except:
-#             #         attempt += 1
-#             #         continue
-#             # if attempt == 3:
-#             #     print(f"Failed to get valid response for {test_entry_id} after {attempt} attempts.")
-#             prompt.append({"role": "assistant", "content": content_response})
-#                 # continue
-
-
-#             llm_tool_call = get_llm_response_n(prompt_n, n_sample=4)
-#             candidate_plans = []
-#             for item in llm_tool_call:
-#                 if "<think>" in item:
-#                     reasoning_content = item.split("<think>")[-1].split("</think>")[0].strip()
-#                     content = item.split("</think>")[-1].strip()
-#                     tool_call = _extract_tool_calls(content)
-#                 candidate_plans.append({
-#                     "thought": reasoning_content,
-#                     "model_response": content,
-#                     "tool_call": tool_call[0] if len(tool_call) > 0 else {}
-#                 })
-#             same_call = True
-#             if len(candidate_plans) > 1:
-#                 tool_call_begin = candidate_plans[0]["tool_call"]
-#                 for item in candidate_plans:
-#                     tool_call = item.get("tool_call", {})
-#                     if tool_call != tool_call_begin:
-#                         same_call = False
-#                         break
-#             # if same_call:
-#             #     continue
-#             candidate_action = []
-#             seen_calls = set()
-#             num = 0
-#             have_ground_truth = False
-#             for plan in candidate_plans:
-#                 tool_call = plan.get("tool_call", {})
-#                 if tool_call != {}:
-#                     assert "arguments" in tool_call, f"Tool call {tool_call} does not have arguments."
-#                 else:
-#                     have_ground_truth = True
-#                 tool_name = tool_call.get("name", None)
-#                 parameters = json.dumps(tool_call.get("parameters", {}), sort_keys=True)
-                
-#                 key = f"{tool_name}:{parameters}"
-#                 if key not in seen_calls:
-#                     seen_calls.add(key)
-#                     candidate_action.append({
-#                         "thought": plan["thought"],
-#                         "action": tool_call if tool_call != {} else plan["model_response"]
-#                     })
-#                     num += 1
-#             if not have_ground_truth:
-#                 candidate_action.append({
-#                     "thought": "",
-#                     "action": content_response
-#                 })
-#             candidate_str = ""
-#             for index, item in enumerate(candidate_action):
-#                 candidate_str += f"### Candidate plans {index + 1}:\n"
-#                 for k, v in item.items():
-#                     candidate_str += f" - {k}: {str(v)}\n"
-#             attempt = 0
-#             while attempt < 3:
-#                 try:
-#                     fusion_result_o = get_llm_response(prompt_n + [{"role": "user", "content": decide_tool_calling_prompt_ground.format(candidate_plans=candidate_str, ground_t=content_response)}])
-#                     fusion_result_c = copy.deepcopy(fusion_result_o)
-#                     if "</think>" in fusion_result_o:
-#                         fusion_result_o = fusion_result_o.split("</think>")[-1].strip()
-#                     match = re.search(r'```json(.*?)```', fusion_result_o, re.DOTALL)
-#                     if match:
-#                         fusion_result = match.group(1).strip()
-#                     else:
-#                         fusion_result = fusion_result_o
-#                     fusion_result = json.loads(fusion_result)
-#                     tool_calls = fusion_result.get("optimal_tool_call", {})
-#                     optimal_plan = fusion_result.get("optimal_plan", "")
-#                     assert tool_calls["name"] == "response_to_user", f"Tool call name is not response_to_user, but {tool_calls['name']}"
-#                     fusion_result_call = tool_calls
-#                     llm_tool_calls.append({"prompt": tokenizer.apply_chat_template(prompt_n + [{"role": "user", "content": decide_tool_calling_prompt.format(candidate_plans=candidate_str)}], tokenize=False, add_generation_prompt=True), 
-#                                         "response": fusion_result_c})
-#                     break
-#                 except:
-#                     attempt += 1
-#             if attempt == 3:
-#                 print(f"❌ 第 {idx} 条样本，第 {attempt} 次尝试失败")
-#             continue
-#         for item in ground_truth[idx]:
-#             tool_call_ground = to_tool_call_format(item)
-#             prompt_n = prompt.copy()
-#             # attempt = 0
-#             # while attempt < 3:
-#             #     try:
-#             #         ref_tool_call = get_llm_response(prompt + [{"role": "user", "content": prompt_tool_call.format(t_ground=tool_call_ground)}])
-#             #         ref_tool_call_n = ref_tool_call.split("</think>")[-1].strip()
-#             #         extract_tool_call = _extract_tool_calls(ref_tool_call_n)
-#             #         assert "<tool_call>" in ref_tool_call_n
-#             #         extract_tool_calls = _extract_tool_calls
-#             #         assert extract_tool_call[0] == extract_tool_calls(tool_call_ground)[0], f"Tool call {extract_tool_call[0]} is not equal to {extract_tool_calls(tool_call_ground)[0]}"
-#             #         prompt.append({"role": "assistant", "content": ref_tool_call})
-#             #     except:
-#             #         breakpoint()
-#             #         attempt += 1
-#             # if attempt == 3:
-#             #     print(f"❌ 第 {idx} 条样本，第 {attempt} 次尝试失败, 工具调用 {tool_call_ground}, 模型输出 {ref_tool_call_n}")
-#             prompt.append({"role": "assistant", "content": tool_call_ground})
-#                 # continue
-#             parsed_action = [item]
-#             execution_results, involved_instances = execute_multi_turn_func_call(
-#                     parsed_action,
-#                     initial_config,
-#                     involved_classes,
-#                     "model",
-#                     test_entry_id,
-#                     long_context=True if "long_context" in test_entry_id else False,
-#                 )
-#             prompt.append({"role": "user", "content": "<tool_response>" + execution_results[0] + "</tool_response>"}) # >
-#             llm_tool_call = get_llm_response_n(prompt_n, n_sample=4)
-#             candidate_plans = []
-#             for item in llm_tool_call:
-#                 if "<think>" in item:
-#                     reasoning_content = item.split("<think>")[-1].split("</think>")[0].strip()
-#                     content = item.split("</think>")[-1].strip()
-#                     tool_call = _extract_tool_calls(content)
-#                 candidate_plans.append({
-#                     "thought": reasoning_content,
-#                     "model_response": content,
-#                     "tool_call": tool_call[0] if len(tool_call) > 0 else {}
-#                 })
-#             same_call = True
-#             if len(candidate_plans) > 1:
-#                 tool_call_begin = candidate_plans[0]["tool_call"]
-#                 for item in candidate_plans:
-#                     tool_call = item.get("tool_call", {})
-#                     if tool_call != tool_call_begin:
-#                         same_call = False
-#                         break
-#             # if same_call:
-#             #     continue
-#             candidate_action = []
-#             seen_calls = set()
-#             num = 0
-#             have_ground_truth = False
-#             for plan in candidate_plans:
-#                 tool_call = plan.get("tool_call", {})
-#                 assert "arguments" in tool_call, f"Tool call {tool_call} does not have arguments"
-#                 tool_name = tool_call.get("name", None)
-#                 parameters = json.dumps(tool_call.get("arguments", {}), sort_keys=True)
-#                 if tool_call == _extract_tool_calls(tool_call_ground)[0]:
-#                     have_ground_truth = True
-                
-#                 key = f"{tool_name}:{parameters}"
-#                 if key not in seen_calls:
-#                     seen_calls.add(key)
-#                     candidate_action.append({
-#                         "thought": plan["thought"],
-#                         "action": tool_call if tool_call != {} else plan["model_response"]
-#                     })
-#                     num += 1
-#             if not have_ground_truth:
-#                 candidate_action.append({
-#                     "thought": "",
-#                     "action": _extract_tool_calls(tool_call_ground)[0]
-#                 })
-#             candidate_str = ""
-#             for index, item in enumerate(candidate_action):
-#                 candidate_str += f"### Candidate plans {index + 1}:\n"
-#                 for k, v in item.items():
-#                     candidate_str += f" - {k}: {str(v)}\n"
-#             attempt = 0
-#             while attempt < 3:
-#                 try:
-#                     fusion_result_o = get_llm_response(prompt_n + [{"role": "user", "content": decide_tool_calling_prompt_ground.format(candidate_plans=candidate_str, ground_t=tool_call_ground)}])
-#                     fusion_result_c = copy.deepcopy(fusion_result_o)
-#                     if "</think>" in fusion_result_o:
-#                         fusion_result_o = fusion_result_o.split("</think>")[-1].strip()
-#                     match = re.search(r'```json(.*?)```', fusion_result_o, re.DOTALL)
-#                     if match:
-#                         fusion_result = match.group(1).strip()
-#                     else:
-#                         fusion_result = fusion_result_o
-#                     fusion_result = json.loads(fusion_result)
-#                     tool_calls = fusion_result.get("optimal_tool_call", {})
-#                     optimal_plan = fusion_result.get("optimal_plan", "")
-#                     assert tool_calls["name"] != "response_to_user", f"Tool call name is response_to_user, but {tool_calls['name']}"
-#                     fusion_result_call = tool_calls
-#                     assert _extract_tool_calls(tool_call_ground)[0] == {"name": fusion_result_call["name"], "arguments": fusion_result_call["parameters"]}, f"Tool call ground truth is {_extract_tool_calls(tool_call_ground)}, but {fusion_result_call}" # [0]
-#                     llm_tool_calls.append({"prompt": tokenizer.apply_chat_template(prompt_n + [{"role": "user", "content": decide_tool_calling_prompt.format(candidate_plans=candidate_str)}], tokenize=False, add_generation_prompt=True), 
-#                                         "response": fusion_result_c})
-#                     break
-#                 except:
-#                     # breakpoint()
-#                     attempt += 1
-#             if attempt == 3:
-#                 print(f"❌ 第 {idx} 条样本，第 {attempt} 次尝试失败, 工具调用 {tool_call_ground}, 模型输出 {fusion_result_c}")
-            
-#         prompt_n = copy.deepcopy(prompt)
-#         content_response = get_llm_response(prompt + [{"role": "user", "content": "Based on the above conversation, give the response by summarizing the information and do not call tools."}]) # .split("</think>")[-1].strip()
-#         thought=content_response.split("</think>")[0].strip().replace("<think>", "").strip()
-#         llm_tool_call = get_llm_response_n(prompt_n, n_sample=4)
-#         candidate_plans = []
-#         for item in llm_tool_call:
-#             if "<think>" in item:
-#                 reasoning_content = item.split("<think>")[-1].split("</think>")[0].strip()
-#                 content = item.split("</think>")[-1].strip()
-#                 tool_call = _extract_tool_calls(content)
-#             candidate_plans.append({
-#                 "thought": reasoning_content,
-#                 "model_response": content,
-#                 "tool_call": tool_call[0] if len(tool_call) > 0 else {}
-#             })
-#         same_call = True
-#         if len(candidate_plans) > 1:
-#             tool_call_begin = candidate_plans[0]["tool_call"]
-#             for item in candidate_plans:
-#                 tool_call = item.get("tool_call", {})
-#                 if tool_call != tool_call_begin:
-#                     same_call = False
-#                     break
-#         # if same_call:
-#         #     continue
-#         candidate_action = []
-#         seen_calls = set()
-#         num = 0
-#         have_ground_truth = False
-#         for plan in candidate_plans:
-#             tool_call = plan.get("tool_call", {})
-#             if tool_call != {}:
-#                 assert "arguments" in tool_call, f"Tool call {tool_call} does not have arguments"
-#             if tool_call == {}:
-#                 have_ground_truth = True
-#             tool_name = tool_call.get("name", None)
-#             parameters = json.dumps(tool_call.get("arguments", {}), sort_keys=True)
-            
-            
-#             key = f"{tool_name}:{parameters}"
-#             if key not in seen_calls:
-#                 seen_calls.add(key)
-#                 candidate_action.append({
-#                     "thought": plan["thought"],
-#                     "action": tool_call if tool_call != {} else plan["model_response"]
-#                 })
-#                 num += 1
-#         if not have_ground_truth:
-#             candidate_action.append({
-#                 "thought": thought, # ""
-#                 "action": content_response.split("</think>")[-1].strip()
-#             })
-#         candidate_str = ""
-#         for index, item in enumerate(candidate_action):
-#             candidate_str += f"### Candidate plans {index + 1}:\n"
-#             for k, v in item.items():
-#                 candidate_str += f" - {k}: {str(v)}\n"
-#         attempt = 0
-#         while attempt < 3:
-#             try:
-#                 fusion_result_o = get_llm_response(prompt_n + [{"role": "user", "content": decide_tool_calling_prompt_ground.format(candidate_plans=candidate_str, ground_t=tool_call_ground)}])
-#                 fusion_result_c = copy.deepcopy(fusion_result_o)
-#                 if "</think>" in fusion_result_o:
-#                     fusion_result_o = fusion_result_o.split("</think>")[-1].strip()
-#                 match = re.search(r'```json(.*?)```', fusion_result_o, re.DOTALL)
-#                 if match:
-#                     fusion_result = match.group(1).strip()
-#                 else:
-#                     fusion_result = fusion_result_o
-#                 fusion_result = json.loads(fusion_result)
-#                 tool_calls = fusion_result.get("optimal_tool_call", {})
-#                 optimal_plan = fusion_result.get("optimal_plan", "")
-#                 assert tool_calls["name"] == "response_to_user", f"Tool call name is not response_to_user, but {tool_calls['name']}"
-                
-#                 llm_tool_calls.append({"prompt": tokenizer.apply_chat_template(prompt_n + [{"role": "user", "content": decide_tool_calling_prompt.format(candidate_plans=candidate_str)}], tokenize=False, add_generation_prompt=True), 
-#                                     "response": fusion_result_c})
-#                 break
-#             except:
-#                 # breakpoint()
-#                 attempt += 1
-#         if attempt == 3:
-#             print(f"❌ 第 {idx} 条样本，第 {attempt} 次尝试失败 {tool_call_ground}\n{fusion_result_c}")
-#         # + [{"role": "user", "content": "Based on the above conversation, give the response by summarizing the information and do not call tools."}]
-#         # print(content_response)
-#         prompt.append({"role": "assistant", "content": content_response})
-#         print(content_response)
-#         # breakpoint()
-#     return {"messages": prompt}, llm_tool_calls
-# def process_single_row(row, row_index):
-#     """
-
-#     Args:
-#         row: DataFrame row containing the original data
-#         current_split_name: Name of the current split (train/test)
-#         row_index: Index of the row in the DataFrame
-
-#     Returns:
-#         pd.Series: Processed row data in the required format
-#     """
-#     import numpy as np
-#     function = []
-#     involved_classes = row.get("involved_classes")
-#     for func_collection in involved_classes:
-#         # func_doc is a list of dict
-#         func_doc = load_file(
-#             MULTI_TURN_FUNC_DOC_PATH  + "/" + MULTI_TURN_FUNC_DOC_FILE_MAPPING[func_collection]
-#         )
-#         function.extend(func_doc)
-#     # Handle Miss Func category; we need to remove the holdout function doc
-#     if "missed_function" in row and not pd.isna(row["missed_function"]):
-#         # print(row["missed_function"])
-#         new_missed = {}
-#         for turn_index, missed_func_names in row["missed_function"].items():
-#             row["missed_function"][turn_index] = []
-#             for missed_func_name in missed_func_names:
-#                 for i, func_doc in enumerate(function):
-#                     if func_doc["name"] == missed_func_name:
-#                         # Add the missed function doc to the missed_function list
-#                         row["missed_function"][turn_index].append(func_doc) # 
-#                         # Remove it from the function list
-#                         function.pop(i)
-#                         break
-#             #  = new_missed
-#     formatted_prompt = ""
-#     formatted_prompt += "# Tools\n\nYou may call one or more functions to assist with the user query.\n\nYou are provided with function signatures within <tools></tools> XML tags:\n<tools>"
-#     for tool in function:
-#         tool["description"] += " Note that the provided function is in Python 3 syntax."
-#         formatted_prompt += f"\n{json.dumps(tool)}"
-#     formatted_prompt += '\n</tools>\n\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\n<tool_call>\n{"name": <function-name>, "arguments": <args-json-object>}\n</tool_call>\n'
-
-#     question = row.get("question", "")
-#     processed_question = []
-#     if "missed_function" in row and not pd.isna(row["missed_function"]):
-#         for idx, item in enumerate(question):
-#             if str(idx) in row["missed_function"]:
-#                 processed_question.append([{"role": "user", "content": json.dumps(row["missed_function"][str(idx)]) + "\nI have updated some more functions you can choose from. What about now?"}])
-#                 assert len(item) == 0
-#             else:
-#                 processed_question.append(item)
-#     else:
-#         processed_question = question
-
-
-#     # Build prompt structure
-#     prompt = [{"role": "system", "content": formatted_prompt}] 
-#     llm_tool_calls = []
-    
-
-#     # Extract ground truth from reward_model or fallback to golden_answers
-#     ground_truth = row.get("golden_answers", [])
-#     initial_config = row.get("initial_config")
-#     involved_classes = row.get("involved_classes")
-#     test_entry_id = row.get("id")
-#     trajectory_id = ""
-#     for idx, q in enumerate(processed_question):
-#         prompt.append({"role": "user", "content": q[0]["content"]})
-#         if len(ground_truth[idx]) == 0:
-#             print(row)
-#             prompt_n = copy.deepcopy(prompt)
-#             # assert "miss_func" in row["id"] or "miss_param" in row["id"], "Ground truth is empty but not a miss_func or miss_param case."
-#             if "miss_func" in row["id"]:
-#                 content_response = "I am sorry, but I cannot provide a valid tool call as the required function is not available."
-#             elif "miss_param" in row["id"]:
-#                 content_response = "I am sorry, but I cannot provide a valid tool call as the required parameters are missing."
-#             attempt = 0
-#             # while attempt < 3:
-#             #     try:
-#             #         ref_response = get_llm_response(prompt + [{"role": "user", "content": prompt_response.format(r_ground=content_response)}])
-#             #         ref_response_n = ref_response.split("</think>")[-1].strip()
-#             #         assert "<tool_call>" not in ref_response_n
-#             #         prompt.append({"role": "assistant", "content": ref_response})
-#             #     except:
-#             #         attempt += 1
-#             #         continue
-#             # if attempt == 3:
-#             #     print(f"Failed to get valid response for {test_entry_id} after {attempt} attempts.")
-#             prompt.append({"role": "assistant", "content": content_response})
-#                 # continue
-
-
-#             llm_tool_call = get_llm_response_n(prompt_n, n_sample=4)
-#             candidate_plans = []
-#             for item in llm_tool_call:
-#                 if "<think>" in item:
-#                     reasoning_content = item.split("<think>")[-1].split("</think>")[0].strip()
-#                     content = item.split("</think>")[-1].strip()
-#                     tool_call = _extract_tool_calls(content)
-#                 candidate_plans.append({
-#                     "thought": reasoning_content,
-#                     "model_response": content,
-#                     "tool_call": tool_call[0] if len(tool_call) > 0 else {}
-#                 })
-#             same_call = True
-#             if len(candidate_plans) > 1:
-#                 tool_call_begin = candidate_plans[0]["tool_call"]
-#                 for item in candidate_plans:
-#                     tool_call = item.get("tool_call", {})
-#                     if tool_call != tool_call_begin:
-#                         same_call = False
-#                         break
-#             # if same_call:
-#             #     continue
-#             candidate_action = []
-#             seen_calls = set()
-#             num = 0
-#             have_ground_truth = False
-#             for plan in candidate_plans:
-#                 tool_call = plan.get("tool_call", {})
-#                 if tool_call != {}:
-#                     assert "arguments" in tool_call, f"Tool call {tool_call} does not have arguments."
-#                 else:
-#                     have_ground_truth = True
-#                 tool_name = tool_call.get("name", None)
-#                 parameters = json.dumps(tool_call.get("parameters", {}), sort_keys=True)
-                
-#                 key = f"{tool_name}:{parameters}"
-#                 if key not in seen_calls:
-#                     seen_calls.add(key)
-#                     candidate_action.append({
-#                         "thought": plan["thought"],
-#                         "action": tool_call if tool_call != {} else plan["model_response"]
-#                     })
-#                     num += 1
-#             if not have_ground_truth:
-#                 candidate_action.append({
-#                     "thought": "",
-#                     "action": content_response
-#                 })
-#             candidate_str = ""
-#             for index, item in enumerate(candidate_action):
-#                 candidate_str += f"### Candidate plans {index + 1}:\n"
-#                 for k, v in item.items():
-#                     candidate_str += f" - {k}: {str(v)}\n"
-#             attempt = 0
-#             while attempt < 3:
-#                 try:
-#                     fusion_result_o = get_llm_response(prompt_n + [{"role": "user", "content": decide_tool_calling_prompt_ground.format(candidate_plans=candidate_str, ground_t=content_response)}])
-#                     fusion_result_c = copy.deepcopy(fusion_result_o)
-#                     if "</think>" in fusion_result_o:
-#                         fusion_result_o = fusion_result_o.split("</think>")[-1].strip()
-#                     match = re.search(r'```json(.*?)```', fusion_result_o, re.DOTALL)
-#                     if match:
-#                         fusion_result = match.group(1).strip()
-#                     else:
-#                         fusion_result = fusion_result_o
-#                     fusion_result = json.loads(fusion_result)
-#                     tool_calls = fusion_result.get("optimal_tool_call", {})
-#                     optimal_plan = fusion_result.get("optimal_plan", "")
-#                     assert tool_calls["name"] == "response_to_user", f"Tool call name is not response_to_user, but {tool_calls['name']}"
-#                     fusion_result_call = tool_calls
-#                     llm_tool_calls.append({"prompt": tokenizer.apply_chat_template(prompt_n + [{"role": "user", "content": decide_tool_calling_prompt.format(candidate_plans=candidate_str)}], tokenize=False, add_generation_prompt=True), 
-#                                         "response": fusion_result_c})
-#                     break
-#                 except:
-#                     attempt += 1
-#             if attempt == 3:
-#                 print(f"❌ 第 {idx} 条样本，第 {attempt} 次尝试失败")
-#             continue
-#         for item in ground_truth[idx]:
-#             tool_call_ground = to_tool_call_format(item)
-#             prompt_n = prompt.copy()
-#             # attempt = 0
-#             # while attempt < 3:
-#             #     try:
-#             #         ref_tool_call = get_llm_response(prompt + [{"role": "user", "content": prompt_tool_call.format(t_ground=tool_call_ground)}])
-#             #         ref_tool_call_n = ref_tool_call.split("</think>")[-1].strip()
-#             #         extract_tool_call = _extract_tool_calls(ref_tool_call_n)
-#             #         assert "<tool_call>" in ref_tool_call_n
-#             #         extract_tool_calls = _extract_tool_calls
-#             #         assert extract_tool_call[0] == extract_tool_calls(tool_call_ground)[0], f"Tool call {extract_tool_call[0]} is not equal to {extract_tool_calls(tool_call_ground)[0]}"
-#             #         prompt.append({"role": "assistant", "content": ref_tool_call})
-#             #     except:
-#             #         breakpoint()
-#             #         attempt += 1
-#             # if attempt == 3:
-#             #     print(f"❌ 第 {idx} 条样本，第 {attempt} 次尝试失败, 工具调用 {tool_call_ground}, 模型输出 {ref_tool_call_n}")
-#             prompt.append({"role": "assistant", "content": tool_call_ground})
-#                 # continue
-#             parsed_action = [item]
-#             execution_results, involved_instances = execute_multi_turn_func_call(
-#                     parsed_action,
-#                     initial_config,
-#                     involved_classes,
-#                     "model",
-#                     test_entry_id,
-#                     long_context=True if "long_context" in test_entry_id else False,
-#                 )
-#             prompt.append({"role": "user", "content": "<tool_response>" + execution_results[0] + "</tool_response>"}) # >
-            # llm_tool_call = get_llm_response_n(prompt_n, n_sample=4)
-            # candidate_plans = []
-            # for item in llm_tool_call:
-            #     if "<think>" in item:
-            #         reasoning_content = item.split("<think>")[-1].split("</think>")[0].strip()
-            #         content = item.split("</think>")[-1].strip()
-            #         tool_call = _extract_tool_calls(content)
-            #     candidate_plans.append({
-            #         "thought": reasoning_content,
-            #         "model_response": content,
-            #         "tool_call": tool_call[0] if len(tool_call) > 0 else {}
-            #     })
-            # same_call = True
-            # if len(candidate_plans) > 1:
-            #     tool_call_begin = candidate_plans[0]["tool_call"]
-            #     for item in candidate_plans:
-            #         tool_call = item.get("tool_call", {})
-            #         if tool_call != tool_call_begin:
-            #             same_call = False
-            #             break
-            # # if same_call:
-            # #     continue
-            # candidate_action = []
-            # seen_calls = set()
-            # num = 0
-            # have_ground_truth = False
-            # for plan in candidate_plans:
-            #     tool_call = plan.get("tool_call", {})
-            #     assert "arguments" in tool_call, f"Tool call {tool_call} does not have arguments"
-            #     tool_name = tool_call.get("name", None)
-            #     parameters = json.dumps(tool_call.get("arguments", {}), sort_keys=True)
-            #     if tool_call == _extract_tool_calls(tool_call_ground)[0]:
-            #         have_ground_truth = True
-                
-            #     key = f"{tool_name}:{parameters}"
-            #     if key not in seen_calls:
-            #         seen_calls.add(key)
-            #         candidate_action.append({
-            #             "thought": plan["thought"],
-            #             "action": tool_call if tool_call != {} else plan["model_response"]
-            #         })
-            #         num += 1
-            # if not have_ground_truth:
-            #     candidate_action.append({
-            #         "thought": "",
-            #         "action": _extract_tool_calls(tool_call_ground)[0]
-            #     })
-            # candidate_str = ""
-            # for index, item in enumerate(candidate_action):
-            #     candidate_str += f"### Candidate plans {index + 1}:\n"
-            #     for k, v in item.items():
-            #         candidate_str += f" - {k}: {str(v)}\n"
-            # attempt = 0
-            # while attempt < 3:
-            #     try:
-            #         fusion_result_o = get_llm_response(prompt_n + [{"role": "user", "content": decide_tool_calling_prompt_ground.format(candidate_plans=candidate_str, ground_t=tool_call_ground)}])
-            #         fusion_result_c = copy.deepcopy(fusion_result_o)
-            #         if "</think>" in fusion_result_o:
-            #             fusion_result_o = fusion_result_o.split("</think>")[-1].strip()
-            #         match = re.search(r'```json(.*?)```', fusion_result_o, re.DOTALL)
-            #         if match:
-            #             fusion_result = match.group(1).strip()
-            #         else:
-            #             fusion_result = fusion_result_o
-            #         fusion_result = json.loads(fusion_result)
-            #         tool_calls = fusion_result.get("optimal_tool_call", {})
-            #         optimal_plan = fusion_result.get("optimal_plan", "")
-            #         assert tool_calls["name"] != "response_to_user", f"Tool call name is response_to_user, but {tool_calls['name']}"
-            #         fusion_result_call = tool_calls
-            #         assert _extract_tool_calls(tool_call_ground)[0] == {"name": fusion_result_call["name"], "arguments": fusion_result_call["parameters"]}, f"Tool call ground truth is {_extract_tool_calls(tool_call_ground)}, but {fusion_result_call}" # [0]
-            #         llm_tool_calls.append({"prompt": tokenizer.apply_chat_template(prompt_n + [{"role": "user", "content": decide_tool_calling_prompt.format(candidate_plans=candidate_str)}], tokenize=False, add_generation_prompt=True), 
-            #                             "response": fusion_result_c})
-            #         break
-            #     except:
-            #         # breakpoint()
-            #         attempt += 1
-#             if attempt == 3:
-#                 print(f"❌ 第 {idx} 条样本，第 {attempt} 次尝试失败, 工具调用 {tool_call_ground}, 模型输出 {fusion_result_c}")
-            
-#         prompt_n = copy.deepcopy(prompt)
-#         content_response = get_llm_response(prompt + [{"role": "user", "content": "Based on the above conversation, give the response by summarizing the information and do not call tools."}]) # .split("</think>")[-1].strip()
-#         thought=content_response.split("</think>")[0].strip().replace("<think>", "").strip()
-#         llm_tool_call = get_llm_response_n(prompt_n, n_sample=4)
-#         candidate_plans = []
-#         for item in llm_tool_call:
-#             if "<think>" in item:
-#                 reasoning_content = item.split("<think>")[-1].split("</think>")[0].strip()
-#                 content = item.split("</think>")[-1].strip()
-#                 tool_call = _extract_tool_calls(content)
-#             candidate_plans.append({
-#                 "thought": reasoning_content,
-#                 "model_response": content,
-#                 "tool_call": tool_call[0] if len(tool_call) > 0 else {}
-#             })
-#         same_call = True
-#         if len(candidate_plans) > 1:
-#             tool_call_begin = candidate_plans[0]["tool_call"]
-#             for item in candidate_plans:
-#                 tool_call = item.get("tool_call", {})
-#                 if tool_call != tool_call_begin:
-#                     same_call = False
-#                     break
-#         # if same_call:
-#         #     continue
-    #     candidate_action = []
-    #     seen_calls = set()
-    #     num = 0
-    #     have_ground_truth = False
-    #     for plan in candidate_plans:
-    #         tool_call = plan.get("tool_call", {})
-    #         if tool_call != {}:
-    #             assert "arguments" in tool_call, f"Tool call {tool_call} does not have arguments"
-    #         if tool_call == {}:
-    #             have_ground_truth = True
-    #         tool_name = tool_call.get("name", None)
-    #         parameters = json.dumps(tool_call.get("arguments", {}), sort_keys=True)
-            
-            
-    #         key = f"{tool_name}:{parameters}"
-    #         if key not in seen_calls:
-    #             seen_calls.add(key)
-    #             candidate_action.append({
-    #                 "thought": plan["thought"],
-    #                 "action": tool_call if tool_call != {} else plan["model_response"]
-    #             })
-    #             num += 1
-    #     if not have_ground_truth:
-    #         candidate_action.append({
-    #             "thought": thought, # ""
-    #             "action": content_response.split("</think>")[-1].strip()
-    #         })
-    #     candidate_str = ""
-    #     for index, item in enumerate(candidate_action):
-    #         candidate_str += f"### Candidate plans {index + 1}:\n"
-    #         for k, v in item.items():
-    #             candidate_str += f" - {k}: {str(v)}\n"
-    #     attempt = 0
-    #     while attempt < 3:
-    #         try:
-    #             fusion_result_o = get_llm_response(prompt_n + [{"role": "user", "content": decide_tool_calling_prompt_ground.format(candidate_plans=candidate_str, ground_t=tool_call_ground)}])
-    #             fusion_result_c = copy.deepcopy(fusion_result_o)
-    #             if "</think>" in fusion_result_o:
-    #                 fusion_result_o = fusion_result_o.split("</think>")[-1].strip()
-    #             match = re.search(r'```json(.*?)```', fusion_result_o, re.DOTALL)
-    #             if match:
-    #                 fusion_result = match.group(1).strip()
-    #             else:
-    #                 fusion_result = fusion_result_o
-    #             fusion_result = json.loads(fusion_result)
-    #             tool_calls = fusion_result.get("optimal_tool_call", {})
-    #             optimal_plan = fusion_result.get("optimal_plan", "")
-    #             assert tool_calls["name"] == "response_to_user", f"Tool call name is not response_to_user, but {tool_calls['name']}"
-                
-    #             llm_tool_calls.append({"prompt": tokenizer.apply_chat_template(prompt_n + [{"role": "user", "content": decide_tool_calling_prompt.format(candidate_plans=candidate_str)}], tokenize=False, add_generation_prompt=True), 
-    #                                 "response": fusion_result_c})
-    #             break
-    #         except:
-    #             # breakpoint()
-    #             attempt += 1
-    #     if attempt == 3:
-    #         print(f"❌ 第 {idx} 条样本，第 {attempt} 次尝试失败 {tool_call_ground}\n{fusion_result_c}")
-    #     # + [{"role": "user", "content": "Based on the above conversation, give the response by summarizing the information and do not call tools."}]
-    #     # print(content_response)
-    #     prompt.append({"role": "assistant", "content": content_response})
-    #     print(content_response)
-    #     # breakpoint()
-    # return {"messages": prompt}, llm_tool_calls
 def process_single_row(row, row_index):
     """
 
@@ -990,7 +248,6 @@ def process_single_row(row, row_index):
         function.extend(func_doc)
     # Handle Miss Func category; we need to remove the holdout function doc
     if "missed_function" in row and not pd.isna(row["missed_function"]):
-        # print(row["missed_function"])
         new_missed = {}
         for turn_index, missed_func_names in row["missed_function"].items():
             row["missed_function"][turn_index] = []
@@ -1002,7 +259,6 @@ def process_single_row(row, row_index):
                         # Remove it from the function list
                         function.pop(i)
                         break
-            #  = new_missed
     formatted_prompt = ""
     formatted_prompt += "# Tools\n\nYou may call one or more functions to assist with the user query.\n\nYou are provided with function signatures within <tools></tools> XML tags:\n<tools>"
     for tool in function:
@@ -1065,8 +321,6 @@ def process_single_row(row, row_index):
             content_response = get_llm_response(prompt + [{"role": "user", "content": "Based on the above conversation, give the response by summarizing the information and do not call tools."}]) # .split("</think>")[-1].strip()
             content_response = content_response.split("</think>")[-1].strip()
             prompt.append({"role": "assistant", "content": content_response})
-            '''print(content_response)'''
-            # breakpoint()
     except:
         print(json.dumps(prompt, indent=2))
         raise Exception
@@ -1092,7 +346,6 @@ def main():
         "BFCL_v4_multi_turn_long_context_training.json",
         "BFCL_v4_multi_turn_miss_func_training.json"
     ]
-
 
     # 读取所有数据类型
     dataset = []
@@ -1153,7 +406,6 @@ def main():
             for idx, item in enumerate(result["messages"]):
                 if item["role"] == "assistant":
                     prompt = result["messages"][:idx]
-                    # prompt = tokenizer.apply_chat_template(result["messages"][:idx], add_generation_prompt=True, tokenize=False)
                     response = item["content"]
                     train_data.append(
                         {
@@ -1162,17 +414,12 @@ def main():
                             "involved_classes": involved_classes
                         }
                     )
-        # for item in fusion_results:
-        #     train_data.append(item)
         return train_data # results
 
 
     def apply_process_row(row):
         return process_single_row(row, row_index=row.name)
     
-    # for i, row in tqdm(df_row.iterrows()):
-    #     process_single_row(row, row_index=i)
-    # ✅ 并行执行
     results = parallel_apply(df_row, apply_process_row, max_workers=100)
 
     # ✅ 转为 DataFrame
@@ -1183,8 +430,6 @@ def main():
     df_processed.to_parquet(train_output_file_path, index=False)
     print(f"✅ Saved {len(df_processed)} processed rows to {train_output_file_path}")
     # logger.info(f"Saved {len(df_processed)} processed rows to {train_output_file_path}")
-
-
 
     # Copy to HDFS if specified
     if args.hdfs_dir:
@@ -1202,9 +447,6 @@ def process_reasoning_row(row, row_index):
         
     assert "<think>" not in response
     if "<think>" not in response:
-        # print(type(prompt))
-        # print(prompt)
-        # get_llm_response(prompt):
         prompt_content = prompt.copy()
         prompt_content.append({"role": "user", "content": f"The correct answer for above dialogue is: {response}. Please generate the thinking process and the action or response!"}) # You need to generate the thinking process for the correct answer. You are not allowed to generate any other content and only the thinking process.
         # print(prompt_content)
@@ -1246,24 +488,6 @@ def process_reasoning(path, local_save_dir, max_workers=100):
     train_output_file_path = os.path.join(local_save_dir, "train_reasoning.parquet")
     df_processed.to_parquet(train_output_file_path, index=False)
     print(f"✅ Saved {len(df_processed)} processed rows to {train_output_file_path}")
-    # train_data = []
-    # df = pd.read_parquet(path)
-    # print(df.head())
-    # print(f"✅ 数据汇总完毕，共 {len(df)} 条样本")
-    # for row in tqdm(df.iterrows(), total=len(df), desc="Processing rows"):
-    #     prompt, response = process_reasoning_row(row, row_index=row.name)
-    #     train_data.append(
-    #         {
-    #             "prompt": prompt,
-    #             "response": response
-    #         }
-    #     )
-    # df_processed = pd.DataFrame(train_data)
-    
-    # # Save processed DataFrame
-    # train_output_file_path = os.path.join(local_save_dir, f"train_reasoning.parquet")
-    # df_processed.to_parquet(train_output_file_path, index=False)
-    # print(f"✅ Saved {len(df_processed)} processed rows to {train_output_file_path}")
 
 def process_candidate_row(row, row_index=None):
     prompt = row["prompt"].tolist()
@@ -1330,9 +554,7 @@ def process_candidate_row(row, row_index=None):
     ground_t = response.split("</think>")[-1] if ground_truth != {} else "dirctly answer to the user"
     prompt_candidate = prompt.copy()
     prompt_candidate.append({"role": "user", "content": decide_tool_calling_prompt.format(candidate_plans=candidate_str) + f".\nThe correct answer for above dialogue is:\n\n" + ground_t + "\n\nYour optimal tool call should be consistent with the correct answer."})
-    # prompt_candidate = (prompt[:-len("<|im_start|>assistant\n")] + f"<|im_start|>user\n" + decide_tool_calling_prompt.format(candidate_plans=candidate_str) + f".\nThe correct answer for above dialogue is:\n\n" + ground_t + "\n\nYour optimal tool call should be consistent with the correct answer.\n\n<|im_end|>\n<|im_start|>assistant\n")
-    '''print(prompt_candidate) # " + response.split("</think>")[-1] + "\n\nincluding the tool name and parameters should be consistent strictly.\nAnd you are not allowed to generate any content that reflect you know the ground truth tool call.'''
-
+    
     response_candidate = client.chat.completions.create( # 
         model=MODEL_NAME,
         messages=prompt_candidate, 
@@ -1353,12 +575,8 @@ def process_candidate_row(row, row_index=None):
             assert tool_calls["name"] == "response_to_user", f"Tool call name is response_to_user, but {tool_calls['name']}"
         else:
             fusion_result_call = tool_calls
-            # try:
             assert _extract_tool_calls(response)[0] == {"name": fusion_result_call["name"], "arguments": fusion_result_call["parameters"]}, f"Tool call ground truth is {_extract_tool_calls(response)}, but {fusion_result_call}"
-            # except:
-                # fusion_result = {"optimal_tool_call": {"name": _extract_tool_calls(response)[0]["name"], "parameters": _extract_tool_calls(response)[0]["arguments"]}, "optimal_plan": optimal_plan}
-    # response_candidate = response_candidate.split("</think>")[-1]
-    # response = "<think>" + response_candidate.strip() + "</think>\n" + response
+            
     return prompt + [{"role": "user", "content": decide_tool_calling_prompt.format(candidate_plans=candidate_str)}], response_candidate, involved_classes
 
 def process_candidate(path, output_path, max_workers=200):
@@ -1366,9 +584,7 @@ def process_candidate(path, output_path, max_workers=200):
     df = pd.read_parquet(path)
     print(df.head())
     print(f"✅ 数据汇总完毕，共 {len(df)} 条样本")
-    # for idx, row in tqdm(df.iterrows(), total=len(df), desc="Processing rows"):
-    #     print(row)
-    #     prompt, response = process_candidate_row(row, row_index=row.name)
+
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
         futures = {
             executor.submit(process_candidate_row, row, row_index=row.name): i
